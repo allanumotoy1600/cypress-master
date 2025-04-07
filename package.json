@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/allanumotoy1600/cypress-master/issues"
   },
-  "homepage": "https://github.com/allanumotoy1600/cypress-master#readme"
+  "homepage": "https://github.com/allanumotoy1600/cypress-master#readme",
+  "dependencies": {
+    "cypress": "^14.2.1"
+  }
 }
