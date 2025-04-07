@@ -1,2 +1,2 @@
 # cypress-master
-Training for cypress automation
+initial readme for cypress automation learning projects
