@@ -1,0 +1,20 @@
+{
+  "name": "cypress-master",
+  "version": "1.0.0",
+  "description": "initial readme for cypress automation learning projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allanumotoy1600/cypress-master.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/allanumotoy1600/cypress-master/issues"
+  },
+  "homepage": "https://github.com/allanumotoy1600/cypress-master#readme"
+}
