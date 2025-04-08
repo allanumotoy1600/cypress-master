@@ -37,7 +37,7 @@ describe('Login Testing', () => {
     cy.get('[data-test="password"]').type('secret_sauce')
     cy.get('[data-test="login-button"]').click()
 
-    //assertions for message 
+    //assertions for error message 
     cy.get('[data-test="error"]').should('be.visible').and('contain','Epic sadface')
   })
 
