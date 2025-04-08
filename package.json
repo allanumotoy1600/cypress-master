@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "login-test": "npx cypress run  --spec 'cypress/e2e/login.cy.js' --browser chrome"
+    "login-test": "npx cypress run --record --spec 'cypress/e2e/login.cy.js' --key c9d6fd8a-320f-4bee-a6ac-81ebc5c6630c --browser chrome"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
   "homepage": "https://github.com/allanumotoy1600/cypress-master#readme",
   "dependencies": {
     "cypress": "^14.2.1"
+  },
+  "devDependencies": {
+    "cypress-mochawesome-reporter": "^3.8.2"
   }
 }
