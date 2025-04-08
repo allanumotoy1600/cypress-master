@@ -54,13 +54,13 @@ Cypress.Commands.add('addtoCart', () => { // FUNCTION OR METHOD --> Then i-call 
     .click()
 
     // Verify cart badge appears with 1 item
-    cy.get('.shopping_cart_badge').should('contain', '1')
+    cy.get('[data-test="shopping-cart-link"]').should('contain', '1')
 
     // Optionally, navigate to the cart and verify item is listed
-    cy.get('.shopping_cart_link').click()
+    cy.get('[data-test="shopping-cart-link"]').click()
     cy.url().should('include', '/cart.html')
-    cy.get('.cart_item').should('have.length', 1)
-    cy.get('.inventory_item_name').should('contain', 'Sauce Labs Backpack')
+    cy.get('[data-test="inventory-item"]').should('have.length', 1)
+    cy.get('[data-test="inventory-item-name"]').should('contain', 'Sauce Labs Backpack')
 }); 
 
 Cypress.Commands.add('checkOut', () => { // FUNCTION OR METHOD --> Then i-call natin sya sa spec or test file natin.
@@ -71,7 +71,7 @@ Cypress.Commands.add('checkOut', () => { // FUNCTION OR METHOD --> Then i-call n
     cy.url().should('include', '/cart.html') 
     
     // Check that the cart is not empty
-    cy.get('.cart_item').should('have.length.greaterThan', 0) 
+    cy.get('[data-test="inventory-item"]').should('have.length.greaterThan', 0) 
 
     // Click the checkout button
     cy.get('[data-test="checkout"]').click() 
@@ -92,17 +92,17 @@ Cypress.Commands.add('checkOut', () => { // FUNCTION OR METHOD --> Then i-call n
 
     // Verify the checkout overview page is displayed
     cy.url().should('include', '/checkout-step-two.html') 
-    cy.get('.checkout_summary_container').should('be.visible') 
+    cy.get('[data-test="checkout-summary-container"]').should('be.visible') 
 
     // Optionally, you can also verify that the product is listed in the summary
-    cy.get('.cart_item').should('have.length', 1) 
-    cy.get('.inventory_item_name').should('contain', 'Sauce Labs Backpack') 
+    cy.get('[data-test="inventory-item"]').should('have.length', 1) 
+    cy.get('[data-test="inventory-item-name"]').should('contain', 'Sauce Labs Backpack') 
 
     // Click the finish button to complete the checkout process
     cy.get('[data-test="finish"]').click() 
 
     // Verify we are on the order confirmation page
     cy.url().should('include', '/checkout-complete.html') 
-    cy.get('.complete-header').should('contain', 'Thank you for your order!') // Verify the page contains the confirmation message
+    cy.get('[data-test="complete-header"]').should('contain', 'Thank you for your order!') // Verify the page contains the confirmation message
 }); 
  
