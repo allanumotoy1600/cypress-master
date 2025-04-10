@@ -23,6 +23,10 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import { generateTestData } from '../fixtures/FakerUtils';  // Adjust the path if necessary
+
+
 Cypress.Commands.add('takeScreenshot', (prefix = '') => {
     // Create a timestamp for the screenshot name, excluding the time part
     const timestamp = new Date().toISOString().split('T')[0]; 
@@ -32,7 +36,7 @@ Cypress.Commands.add('takeScreenshot', (prefix = '') => {
     const screenshotName = `${prefix}-${testName}-${timestamp}`;
   
     // Define the custom path where the screenshot will be saved
-    const screenshotPath = `/screenshots/${screenshotName}.png`; 
+    const screenshotPath = `${screenshotName}.png`; 
     
     // Take the screenshot and save it to the custom path
     cy.screenshot(screenshotPath); // 
@@ -106,3 +110,32 @@ Cypress.Commands.add('checkOut', () => { // FUNCTION OR METHOD --> Then i-call n
     cy.get('[data-test="complete-header"]').should('contain', 'Thank you for your order!') // Verify the page contains the confirmation message
 }); 
  
+Cypress.Commands.add('generateData' , () => {
+  let testData = generateTestData()
+  cy.writeFile('cypress/fixtures/testData.json', testData);
+});
+
+Cypress.Commands.add('formDetails', () => {
+
+  cy.fixture('testData.json').then((testData) => {
+    cy.get('input[id="customer.firstName"]').type(testData.firstName)
+    cy.get('input[id="customer.lastName"]').type(testData.lastName)
+    cy.get('input[id="customer.address.street"]').type(testData.address)
+    cy.get('input[id="customer.address.city"]').type(testData.city)
+    cy.get('input[id="customer.address.state"]').type(testData.state)
+    cy.get('input[id="customer.address.zipCode"]').type(testData.zip)
+    cy.get('input[id="customer.phoneNumber"]').type(testData.phone)
+    cy.get('input[id="customer.ssn"]').type(testData.ssn)
+    cy.get('input[id="customer.username"]').type(testData.username)
+    cy.get('input[id="customer.password"]').type(testData.password)
+    cy.get('input[id="repeatedPassword"]').type(testData.password)
+  });
+});
+Cypress.Commands.add('authDetails' , () => {
+
+  cy.fixture('testData.json').then((testData) => {
+    cy.get('input[name="username"]').type(testData.username)
+    cy.get('input[name="password"]').type(testData.password)
+    cy.get('input[value="Log In"]').click()
+  });
+});
