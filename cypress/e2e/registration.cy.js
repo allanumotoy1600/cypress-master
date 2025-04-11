@@ -3,9 +3,9 @@
 
 describe ('Registration Feature - ParasoftBank', () => {
 
-    before(() => {
-        cy.generateData()
-    });
+    // before(() => {
+    //     cy.generateData()
+    // });
 
 
     beforeEach(() => {
@@ -17,10 +17,12 @@ describe ('Registration Feature - ParasoftBank', () => {
     });
 
     it('Should fill up form', () => {
+        cy.generateData()
         cy.formDetails()
     });
 
     it('should successfully register account', () => {
+        cy.generateData()
         cy.formDetails()
         cy.get('input[value="Register"]').click()
 
@@ -35,7 +37,7 @@ describe ('Registration Feature - ParasoftBank', () => {
     
         // Assert error messages for required fields
         cy.get('span[class="error"]').should('contain', 'required');
-      });
+      });~
 
       it('should show an error for passwords that do not match', () => {
         const password = 'Password123!';

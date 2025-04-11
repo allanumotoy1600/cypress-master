@@ -37,14 +37,9 @@ jobs:
         run: npm ci
 
       # Step 5: Run login.cy.js test
-      - name: Run login.cy.js test
-        run: npm run login-test
+      - name: Run automation-exercise test
+        run: npm run exercise-test
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Run eComm-test.cy.js test
-        run: npm run eComm-test
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
