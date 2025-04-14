@@ -43,3 +43,24 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
+      # Step 6: Archive Results Report
+      - name: Cypress Regression E2E Test Report
+        uses: actions/upload-artifact@v4
+        with:
+           name: regression-test-report
+           path: cypress/reports/html/index.html
+
+      # Step 7: Archive Screenshot 
+      - name: Cypress Screenshot - Test Evidences
+        uses: actions/upload-artifact@v4
+        with:
+           name: checkout_screenshot
+           path: cypress/exercise.cy.js/
+
+      # Step 8: Upload report to GitHub Pages artifact
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: cypress/downloads/ # Ensure the directory is uploaded, not just the file
+
+      
