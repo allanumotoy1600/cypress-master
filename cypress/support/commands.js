@@ -208,3 +208,19 @@ Cypress.Commands.add('VerifyUser', () => {
     cy.contains(`Logged in as ${userData.firstName}`).should('be.visible');
     });
 });
+
+Cypress.Commands.add('CardSub', () => {
+
+  cy.get('form#payment-form').then(($form) => {
+    const rawForm = $form[0];
+    rawForm.addEventListener('submit', (e) => {
+      e.preventDefault(); // Prevent the first submission only
+    }, { once: true }); // This makes it fire only ONCE
+  });
+
+  cy.CardDetails(); 
+  cy.contains('Pay and Confirm Order').click();
+  cy.contains('Your order has been placed successfully!').should('be.visible');
+  cy.contains('Pay and Confirm Order').click();
+});
+

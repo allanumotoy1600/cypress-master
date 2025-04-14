@@ -8,6 +8,8 @@ export const generateTestData = () => {
     let userName = userNameString + userNameNumeric;
     let expiryMonth = faker.number.int({ min: 1, max: 12 });
     let paddedMonth = String(expiryMonth).padStart(2, '0');
+    let customCountries = ['India', 'United States', 'Canada', 'Australia', 'Israel', 'New Zealand', 'Singapore'];
+
 
     return {
       
@@ -23,7 +25,7 @@ export const generateTestData = () => {
       city: faker.location.city(),
       state: faker.location.state(),
       zip: faker.location.zipCode(),
-      country : `Australia`,
+      country : faker.helpers.arrayElement(customCountries),
       card: faker.string.numeric(16),
       cvc: faker.string.numeric(3),
       expMonth: paddedMonth,

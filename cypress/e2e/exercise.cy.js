@@ -5,10 +5,6 @@ describe('Automation Exercise - Test Cases [14,15,16]', () => {
     
         before(() => {
         cy.generateData()
-        // cy.disableAnimations();
-        cy.visit('http://automationexercise.com');
-        cy.contains('a', ' Cart').as('cartBtn');
-
     });
 
     beforeEach(() => {
@@ -23,6 +19,7 @@ describe('Automation Exercise - Test Cases [14,15,16]', () => {
       cy.contains('Add to cart').click();
       cy.contains('Continue Shopping').click();
 
+      cy.contains('a', ' Cart').as('cartBtn');
       cy.get('@cartBtn').click();
       cy.url().should('include', '/view_cart');
       cy.contains('Shopping Cart').should('be.visible');
@@ -43,8 +40,7 @@ describe('Automation Exercise - Test Cases [14,15,16]', () => {
       cy.get('textarea[name="message"]').type('Please deliver between 9 AM and 5 PM.');
       cy.contains('Place Order').click();
       
-      cy.CardDetails();
-      cy.contains('Pay and Confirm Order').click();
+      cy.CardSub();
       cy.contains('Order Placed!').should('be.visible');
   
       cy.contains('Delete Account').click();
@@ -77,8 +73,7 @@ describe('Automation Exercise - Test Cases [14,15,16]', () => {
         cy.get('textarea[name="message"]').type('Please handle with care.');
         cy.contains('Place Order').click();
     
-        cy.CardDetails();
-        cy.contains('Pay and Confirm Order').click();
+        cy.CardSub();
         cy.contains('Order Placed!').should('be.visible');
     
         cy.contains('Delete Account').click();
@@ -118,11 +113,10 @@ describe('Automation Exercise - Test Cases [14,15,16]', () => {
     
         cy.get('textarea[name="message"]').type('Deliver during working hours.');
         cy.contains('Place Order').click();
-    
-        cy.CardDetails();
-        cy.contains('Pay and Confirm Order').click();
+
+        cy.CardSub();
         cy.contains('Order Placed!').should('be.visible');
-    
+
         cy.contains('Delete Account').click();
         cy.contains('Account Deleted!').should('be.visible');
         cy.get('[data-qa="continue-button"]').click();
