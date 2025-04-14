@@ -63,4 +63,19 @@ jobs:
         with:
           path: cypress/reports/ # Ensure the directory is uploaded, not just the file
 
-      
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+        
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      # Step 2: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4      
