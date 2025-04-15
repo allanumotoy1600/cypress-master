@@ -55,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
            name: checkout_screenshot
-           path: cypress/exercise.cy.js/
+           path: cypress/screenshots/exercise.cy.js/
 
       # Step 8: Upload report to GitHub Pages artifact
       - name: Upload GitHub Pages artifact
