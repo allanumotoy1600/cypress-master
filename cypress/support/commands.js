@@ -1,3 +1,4 @@
+/// <reference types ="cypress" />
 import { generateTestData } from '../fixtures/FakerUtils';  // Adjust the path if necessary
 
  // ############################ GLOBAL - COMMANDS ########################################
@@ -11,10 +12,10 @@ Cypress.Commands.add('takeScreenshot', (prefix = '') => {
     const screenshotName = `${prefix}-${testName}-${timestamp}`;
   
     // Define the custom path where the screenshot will be saved
-    const screenshotPath = `${screenshotName}.png`; 
+    // const screenshotPath = `${screenshotName}.png`; 
     
     // Take the screenshot and save it to the custom path
-    cy.screenshot(screenshotPath); // 
+    cy.screenshot(screenshotName); // 
   });
 
   Cypress.Commands.add('generateData' , () => {
