@@ -195,3 +195,26 @@ Cypress.Commands.add('CardSub', () => {
   cy.contains('Pay and Confirm Order').click();
 });
 
+ // ############################ PET STORE | SWAGGERUI - COMMANDS ###############################################################################
+import { generateFakePet, generateFakeUser, generateFakeOrder } from '../fixtures/PetFaker';
+
+// Command to generate a fake pet and write it to pet-Data.json
+Cypress.Commands.add('generatePet', () => {
+  const pet = generateFakePet(); // Generate a single pet
+  cy.writeFile('cypress/fixtures/pet-Data.json', pet); // Append the pet to pet-Data.json
+  return cy.wrap(pet); // Wrap it so it can be used in Cypress chains
+});
+
+// Command to generate a fake user and write it to user-Data.json
+Cypress.Commands.add('generateUser', () => {
+  const user = generateFakeUser(); // Generate a single user
+  cy.writeFile('cypress/fixtures/user-Data.json', user); // Append the user to user-Data.json
+  return cy.wrap(user); // Wrap it so it can be used in Cypress chains
+});
+
+// Command to generate a fake order and write it to order-Data.json
+Cypress.Commands.add('generateOrder', (petId = null) => {
+  const order = generateFakeOrder(petId); // Generate a single order
+  cy.writeFile('cypress/fixtures/order-Data.json', order); // Append the order to order-Data.json
+  return cy.wrap(order); // Wrap it so it can be used in Cypress chains
+});
