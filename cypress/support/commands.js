@@ -1,20 +1,14 @@
 /// <reference types ="cypress" />
-import { generateTestData } from '../fixtures/FakerUtils';  // Adjust the path if necessary
+import { generateTestData } from '../fixtures/FakerUtils';  
+import RegistrationPage from './registration.page';
 
  // ############################ GLOBAL - COMMANDS ########################################
 
 Cypress.Commands.add('takeScreenshot', (prefix = '') => {
-    // Create a timestamp for the screenshot name, excluding the time part
     const timestamp = new Date().toISOString().split('T')[0]; 
     const testName = Cypress.mocha.getRunner().suite.title + '-' + Cypress.mocha.getRunner().test.title;
-    
-    // Generate the screenshot name
+
     const screenshotName = `${prefix}-${testName}-${timestamp}`;
-  
-    // Define the custom path where the screenshot will be saved
-    // const screenshotPath = `${screenshotName}.png`; 
-    
-    // Take the screenshot and save it to the custom path
     cy.screenshot(screenshotName); // 
   });
 
@@ -23,43 +17,19 @@ Cypress.Commands.add('takeScreenshot', (prefix = '') => {
     cy.writeFile('cypress/fixtures/testData.json', testData);
   });
 
-  // Cypress.Commands.add('disableAnimations', () => {
-  //   cy.document().then((doc) => {
-  //     const style = doc.createElement('style');
-  //     style.innerHTML = `
-  //       * {
-  //         animation: none !important;
-  //         transition: none !important;
-  //       }
-  //     `;
-  //     doc.head.appendChild(style);
-  //   });
-  // });
-
  // ############################ PARASOFT BANK - COMMANDS ###############################################################################
 
 Cypress.Commands.add('formDetails', () => {
-
   cy.readFile('cypress/fixtures/testData.json').then((testData) => {
-    cy.get('input[id="customer.firstName"]').type(testData.firstName)
-    cy.get('input[id="customer.lastName"]').type(testData.lastName)
-    cy.get('input[id="customer.address.street"]').type(testData.address)
-    cy.get('input[id="customer.address.city"]').type(testData.city)
-    cy.get('input[id="customer.address.state"]').type(testData.state)
-    cy.get('input[id="customer.address.zipCode"]').type(testData.zip)
-    cy.get('input[id="customer.phoneNumber"]').type(testData.phone)
-    cy.get('input[id="customer.ssn"]').type(testData.ssn)
-    cy.get('input[id="customer.username"]').type(testData.username)
-    cy.get('input[id="customer.password"]').type(testData.password)
-    cy.get('input[id="repeatedPassword"]').type(testData.password)
+    RegistrationPage.fillSignUpForm(testData);
+    RegistrationPage.submitSignUpForm();
+    RegistrationPage.verifySignUpSuccess(testData.username);
   });
 });
 Cypress.Commands.add('authDetails' , () => {
 
-  cy.fixture('testData.json').then((testData) => {
-    cy.get('input[name="username"]').type(testData.username)
-    cy.get('input[name="password"]').type(testData.password)
-    cy.get('input[value="Log In"]').click()
+  cy.readFile('cypress/fixtures/testData.json').then((testData) => {
+    RegistrationPage.LoginForm(testData.username, testData.password);
   });
 });
 
@@ -79,14 +49,14 @@ Cypress.Commands.add('restoreCart', () => {
   });
 });
 
-Cypress.Commands.add('auth', (username, password) => { // FUNCTION OR METHOD --> Then i-call natin sya sa spec or test file natin.
+Cypress.Commands.add('auth', (username, password) => { 
   cy.visit('https://www.saucedemo.com/', {timeout: 240000})
     cy.get('[data-test="username"]').type(username)
     cy.get('[data-test="password"]').type(password)
     cy.get('[data-test="login-button"]').click()
 }); 
 
-Cypress.Commands.add('addtoCart', () => { // FUNCTION OR METHOD --> Then i-call natin sya sa spec or test file natin.
+Cypress.Commands.add('addtoCart', () => { 
   // Add first product to cart
   cy.get('[data-test="add-to-cart-sauce-labs-backpack"]')
   .should('be.visible')
@@ -102,7 +72,7 @@ Cypress.Commands.add('addtoCart', () => { // FUNCTION OR METHOD --> Then i-call 
   cy.get('[data-test="inventory-item-name"]').should('contain', 'Sauce Labs Backpack')
 }); 
 
-Cypress.Commands.add('checkOut', () => { // FUNCTION OR METHOD --> Then i-call natin sya sa spec or test file natin.
+Cypress.Commands.add('checkOut', () => { 
   //run addtoCart command
   cy.addtoCart()
   
