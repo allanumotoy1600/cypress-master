@@ -4,9 +4,6 @@
 let petId;
 let updatedPet;
 let pet; // Shared variable to store the pet ID
-// {'testIsolation': false},
-
-//const apiKey = Cypress.env('API_KEY') || 'special-key';
 
 describe('Pet API Tests', () => {
 
