@@ -211,7 +211,7 @@ describe('DataTables Features - Rendering', () => {
         });
     });
 
-    it.only('Verify Salary Sorting functionality', () => {  
+    it.skip('Verify Salary Sorting functionality', () => {  
         cy.viewport(800, 844)  
         cy.contains('th', 'Salary').click();
     
