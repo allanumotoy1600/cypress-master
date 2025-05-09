@@ -23,10 +23,10 @@ module.exports = defineConfig({
     projectName: process.env.PROJECT_NAME || "Cypress Test Automation",
     environment: process.env.ENVIRONMENT || "QA",
     API_KEY: process.env.API_KEY,
-    API_BASE_URL: process.env.API_BASE_URL || 'https://petstore.swagger.io/v2',
+    API_BASE_URL: process.env.API_BASE_URL || 'https://datatables.net/',
   },
   e2e: {
-    baseUrl: process.env.API_BASE_URL || 'https://petstore.swagger.io/v2',
+    baseUrl: process.env.API_BASE_URL || 'https://datatables.net/',
     setupNodeEvents(on, config) {
       on('before:run', async (details) => {
         console.log('override before:run');
